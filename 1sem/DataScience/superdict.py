@@ -117,10 +117,3 @@ class SuperDict(dict):
 			raise IndexError
 		return ans
 
-sd = SuperDict({"a": 3, 5: "t", "ab": "fc", "366": ""})
-sd1 = SuperDict("a.json")
-sd2 = SuperDict("b.csv")
-
-print sd["a"]
-print sd.get_key_starts_from("a")
-print sd1 + sd2

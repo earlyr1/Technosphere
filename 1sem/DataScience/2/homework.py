@@ -28,7 +28,7 @@ print np.array([i for i in range(1, 26)]).reshape((5, 5)).T
 print ''
 
 
-vecpattern = [6, 7, 3, 5, 9]
+vecpattern = np.array([6, 7, 3, 5, 9])
 
 matpattern = np.array(
 			[[6, 3, 67, 5, 2],
@@ -38,12 +38,11 @@ matpattern = np.array(
 			]
 	)
 print 5
-help_ = np.linalg.norm(np.array([vecpattern for i in range(4)]) - matpattern, axis = 1)
-print help_
+print np.linalg.norm(vecpattern - matpattern, axis = 1)
 print ''
 
 print 6
-f = lambda x: scipy.spatial.distance.cosine(x, np.array(vecpattern))
-for i in matpattern:
-	print f(i)
-
+hlp = np.sum(vecpattern * matpattern, axis = 1)
+hlp = hlp / np.linalg.norm(vecpattern)
+hlp = hlp / np.linalg.norm(matpattern, axis=1)
+print 1 - hlp

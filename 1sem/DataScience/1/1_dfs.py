@@ -8,6 +8,6 @@ def dfs(direct, delta = 0):
 		try:
 			dfs(direct + "/" + i, delta + 1)
 		except Exception:
-			print "    " * delta + i
+			print "    " * (delta+1) + i
 
 dfs(".")

@@ -93,7 +93,7 @@ class SuperDict(dict):
 			print(i, j, file = f)
 		f.close()
 
-
+ 
 	def to_json(self, filename):
 		f = open(filename, "w")
 		print(self, file = f)
@@ -125,6 +125,6 @@ class SuperDict(dict):
 			raise IndexError
 		return ans
 
-sd = SuperDict("1_a.json") + SuperDict("1_b.csv")
-sd.to_json("1_a1.json")
-sd.to_csv("1_b1.csv")
+sd = SuperDict("a.json") + SuperDict("b.csv")
+sd.to_json("a.json")
+sd.to_csv("b.csv")

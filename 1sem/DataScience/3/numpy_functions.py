@@ -2,15 +2,7 @@ import numpy as np
 
 
 def matrix_multiply(X, Y):
-    """ Matrix multiplication
-    Inputs:
-      - X: A numpy array of shape (N, M)
-      - Y: A numpy array of shape (M, K)
-    Output:
-      - out: A numpy array of shape (N, K)
-    """
-    out = None
-    return out
+    return np.dot(X, Y)
 
 
 def matrix_rowmean(X, weights=None):
@@ -24,8 +16,7 @@ def matrix_rowmean(X, weights=None):
     Output:
       - out: A numpy array of shape (N,)
     """
-    out = None
-    return out
+    return np.mean(X * weights, axis = 1)
 
 
 def cosine_similarity(X, top_n=10, with_mean=True, with_std=True):
@@ -52,5 +43,6 @@ def cosine_similarity(X, top_n=10, with_mean=True, with_std=True):
         X = array([[ 1.,  0.], [ 0.,  1.]])
 
     """
+    
     out = None
     return out

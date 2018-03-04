@@ -5,7 +5,7 @@ def matrix_multiply(X, Y):
     return np.dot(X, Y)
 
 
-def matrix_rowmean(X, weights=None):
+def matrix_rowmean(X, weights=1):
     """ Calculate mean of each row.
     In case of weights do weighted mean.
     For example, for matrix [[1, 2, 3]] and weights [0, 1, 2]

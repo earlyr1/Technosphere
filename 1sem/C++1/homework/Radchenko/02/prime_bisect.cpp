@@ -26,20 +26,24 @@ int RbinSearch(int key) {
     return r;
 }
 
-int main(int argc, char ** argv) {
-
-	if (argc == 1 || argc % 2 == 0) return -1;
-	int vec_sz = Data[Size - 1] + 2;
-	std::vector<bool> isprime(vec_sz, true);
+void Erato(std::vector<bool> &isprime) {
 	isprime[1] = false;
 	for(int i = 2; i < isprime.size(); i++) {
 		if (isprime[i]) {
 			int k = 2;
-			while (k * i < vec_sz) {
+			while (k * i < isprime.size()) {
 				isprime[i * (k++)] = false;
 			}
 		}
 	}
+}
+
+int main(int argc, char ** argv) {
+
+	if (argc == 1 || argc % 2 == 0) return -1;
+	int vec_sz = Data[Size - 1];
+	std::vector<bool> isprime(vec_sz, true);
+	Erato(isprime);
 
 	for(int i = 1; i < argc; i += 2) {
 		int L = std::atoi(argv[i]);

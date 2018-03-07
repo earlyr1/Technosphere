@@ -10,8 +10,13 @@ def matrix_multiply(X, Y):
     Output:
       - out: A numpy array of shape (N, K)
     """
-    out = None
-    return out
+    Z = np.zeros(X.shape[0], Y.shape[1])
+    for i in range(X.shape[0]):
+      for j in range(Y.shape[0]):
+        for k in range(Z.shape[1]):
+          Z[i][k] += X[i][j] * Y[j][k]
+
+    return Z
 
 
 @jit(nopython=True)

@@ -31,6 +31,8 @@ def matrix_rowmean(X, weights=None):
     Output:
       - out: A numpy array of shape (N,)
     """
+
+    
     out = None
     return out
 

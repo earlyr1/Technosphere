@@ -43,6 +43,11 @@ def cosine_similarity(X, top_n=10, with_mean=True, with_std=True):
         X = array([[ 1.,  0.], [ 0.,  1.]])
 
     """
-    
-    out = None
-    return out
+    if with_mean: X = (X.T - np.mean(X, axis = 1)).T
+    if with_std: X = (X.T / np.std(X, axis = 1)).T
+    norms = np.linalg.norm(X, axis = 1)
+    norms = np.dot(norms, norms.T)
+    return np.dot(X, X.T) / norms
+
+a = np.array([[1.,0,0,0], [0,1,0,0], [0,0,0,1]])
+print cosine_similarity(a)

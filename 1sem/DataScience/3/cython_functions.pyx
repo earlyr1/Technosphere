@@ -9,6 +9,7 @@ cpdef matrix_multiply(X, Y):
     Output:
       - out: A numpy array of shape (N, K)
     """
+    cpdef 
     out = None
     return out
 

@@ -1,6 +1,11 @@
-from distutils.core import setup
-from Cython.Build import cythonize
+import numpy
+from setuptools import setup, Extension
+
+ext_modules = [Extension("cython_functions",
+                         ["cython_functions.pyx"])
+               ]
 
 setup(
-    ext_modules=cythonize("cython_functions.pyx")
+    ext_modules=ext_modules,
+    include_dirs=[numpy.get_include()]
 )

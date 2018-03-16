@@ -1,7 +1,9 @@
 import numpy as np
+cimport cython
+cimport numpy as np
 
 
-cpdef matrix_multiply(X, Y):
+cdef matrix_multiply(np.ndarray[np.float64_t, ndim = 2] X, np.ndarray[np.float64_t, ndim = 2] Y): 
     """ Matrix multiplication
     Inputs:
       - X: A numpy array of shape (N, M)
@@ -9,12 +11,16 @@ cpdef matrix_multiply(X, Y):
     Output:
       - out: A numpy array of shape (N, K)
     """
-    cpdef 
-    out = None
-    return out
+    cdef np.ndarray Z = np.zeros([X.shape[0], Y.shape[1]], dtype = X.dtype)
+    for i in range(X.shape[0]):
+      for k in range(Y.shape[1]):
+        for j in range(X.shape[1]):
+          Z[i, k] += X[i, j] * Y[j, k]
+
+    return Z
 
 
-cpdef matrix_rowmean(X, weights=None):
+cdef matrix_rowmean(X, weights=None):
     """ Calculate mean of each row.
     In case of weights do weighted mean.
     For example, for matrix [[1, 2, 3]] and weights [0, 1, 2]
@@ -29,7 +35,7 @@ cpdef matrix_rowmean(X, weights=None):
     return out
 
 
-cpdef cosine_similarity(X, top_n=10, with_mean=True, with_std=True):
+cdef cosine_similarity(X, top_n=10, with_mean=True, with_std=True):
     """ Calculate cosine similarity between each pair of row.
     1. In case of with_mean: subtract mean of each row from row
     2. In case of with_std: divide each row on it's std

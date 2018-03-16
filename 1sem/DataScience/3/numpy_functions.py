@@ -43,14 +43,13 @@ def cosine_similarity(X, top_n=10, with_mean=True, with_std=True):
         X = array([[ 1.,  0.], [ 0.,  1.]])
 
     """
-    if with_mean: X = (X.T - np.mean(X, axis = 1)).T
-    if with_std: X = (X.T / np.std(X, axis = 1)).T
+    if with_mean: X = X - np.mean(X.reshape(1, -1), axis = 1)
+    if with_std: X = X / np.std(X.reshape(1, -1), axis = 1)
+    print X
     for i in range(X.shape[0]):
       for j in range(X.shape[1] - top_n):
-        X[i][np.argmin(np.absolute(arr))] = 0
+        X[i][np.argmin(X[i])] = 0
+    print X
     norms = np.linalg.norm(X, axis = 1)
     norms = np.dot(norms, norms.T)
     return np.dot(X, X.T) / norms
-
-a = np.array([[1.,0,0,0], [0,1,0,0], [0,0,0,1]])
-print cosine_similarity(a)

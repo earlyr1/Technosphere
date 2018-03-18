@@ -5,7 +5,7 @@ def matrix_multiply(X, Y):
     return np.dot(X, Y)
 
 
-def matrix_rowmean(X, weights=1):
+def matrix_rowmean(X, weights=np.zeros((0,))):
     """ Calculate mean of each row.
     In case of weights do weighted mean.
     For example, for matrix [[1, 2, 3]] and weights [0, 1, 2]
@@ -16,7 +16,8 @@ def matrix_rowmean(X, weights=1):
     Output:
       - out: A numpy array of shape (N,)
     """
-    return np.mean(X * weights, axis = 1)
+    if weights.shape[0] == 0: weights = np.ones((X.shape[1], ))
+    return np.dot(X, weights) / weights.sum()
 
 
 def cosine_similarity(X, top_n=10, with_mean=True, with_std=True):
@@ -43,13 +44,16 @@ def cosine_similarity(X, top_n=10, with_mean=True, with_std=True):
         X = array([[ 1.,  0.], [ 0.,  1.]])
 
     """
-    if with_mean: X = X - np.mean(X.reshape(1, -1), axis = 1)
-    if with_std: X = X / np.std(X.reshape(1, -1), axis = 1)
-    print X
+    #print X
+    if with_mean: X = X - np.mean(X, axis = 1).reshape(-1, 1)
+    #print X
+    if with_std: X = X / np.std(X, axis = 1).reshape(-1, 1)
+    #print X
     for i in range(X.shape[0]):
-      for j in range(X.shape[1] - top_n):
-        X[i][np.argmin(X[i])] = 0
-    print X
-    norms = np.linalg.norm(X, axis = 1)
+      X[i][np.argsort(X[i])[:X.shape[1] - top_n]] = 0
+    #print X
+    norms = np.linalg.norm(X, axis = 1).reshape((-1, 1))
     norms = np.dot(norms, norms.T)
+    
     return np.dot(X, X.T) / norms
+

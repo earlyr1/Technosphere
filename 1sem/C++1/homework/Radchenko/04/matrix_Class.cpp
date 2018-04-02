@@ -32,10 +32,10 @@ public:
 		matr = vector<Row>(n, Row(m, init));
 	};
 	size_t getRows() const {
-		return n;
+		return m;
 	}
 	size_t getColumns() const {
-		return m;
+		return n;
 	}
 	Row& operator[] (size_t i) {
 		if (i >= n) throw std::out_of_range("Out of row index");
@@ -56,8 +56,8 @@ public:
 	bool operator ==(const Matrix &other) const {
 		if ((*this).getRows() != other.getRows()) return false;
 		if ((*this).getColumns() != other.getColumns()) return false;
-		for (size_t i = 0; i < (*this).getRows(); i++) {
-			for(size_t j = 0; j < (*this).getColumns(); j++) {
+		for (size_t i = 0; i < (*this).getColumns(); i++) {
+			for(size_t j = 0; j < (*this).getRows(); j++) {
 				if ((*this)[i][j] != other[i][j]) return false;
 			}
 		}
@@ -68,4 +68,3 @@ public:
 		return !((*this) == other);
 	}
 };
-
